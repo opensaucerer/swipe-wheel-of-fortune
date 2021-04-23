@@ -1,6 +1,6 @@
 A Wheel of Fortune created for Swipe Telemcom
 
-![spin-wheel](https://github.com/samperfect/swipe-wheel-of-fortune/blob/main/wheel.png)
+![spin-wheel](https://github.com/samperfect/swipe-wheel-of-fortune/blob/main/wheel.PNG)
 
 ## Description
 
