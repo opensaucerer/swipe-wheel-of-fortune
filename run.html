@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Swip Wheel of Fortune</title>
+    <script src="lib/jquery.min.js"></script>
+    <script src="src/jquery.spin-wheel.js"></script>
+    <script src="src/jquery.spin-wheel-skins.js"></script>
+  </head>
+
+  <body>
+    <div class="modal" id="modal-1" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div
+          class="modal-content"
+          style="width: fit-content; max-width: fit-content; padding: unset"
+        >
+          <a href="#" class="close" role="button" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </a>
+          <div id="spinwheel"></div>
+          <div style="margin: auto; text-align: center">
+            <button class="btn btn-primary btn-lg" type="button" id="spin">
+              SPIN THE WHEEL
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- modal ends -->
+
+    <div class="page-wrapper">
+      <!-- Modal toggle inside the content wrapper -->
+      <div
+        style="
+          display: flex;
+          height: 100vh;
+          width: 100vw;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <a href="#modal-1" class="btn btn-primary" role="button"
+          >Launch the Wheel</a
+        >
+      </div>
+    </div>
+
+    <script>
+      $(function () {
+        SpinWheelSkins['myskin'] = $.extend({}, SpinWheelSkins.default);
+        //SpinWheelSkins['myskin'].innerCircle[0]['shadow'].type = 'outer';
+        SpinWheelSkins['myskin'].innerCircle[1]['color'] = '#3bafed';
+        SpinWheelSkins['myskin'].innerCircle[1]['image'] = 'swipe2.png';
+
+        /*
+        Pen/book - 25%
+Shirts 40%
+Sweat shirts 6%
+Hoodie 6%
+Cap 6%
+Head warmer 6%
+Umbrella 6%
+Bag 5% */
+
+        $('#spinwheel').spinWheel({
+          slices: [
+            { label: 'Book & Pen', chance: 15, prize: true },
+            { label: 'Shirts', chance: 30, prize: true },
+            { label: 'Hoodie', chance: 2, prize: true },
+            { label: 'Sweat Shirts', chance: 2, prize: true },
+            {
+              label: 'Cap',
+              chance: 2,
+              prize: true,
+              style: {
+                text: {
+                  color: 'orange',
+                  font: 'sans-serif',
+                  font_size: 10,
+                },
+              },
+            },
+            { label: 'Head Warmer', chance: 2, prize: true },
+            { label: 'Umbrella', chance: 2, prize: true },
+            { label: 'Bag', chance: 1, prize: true },
+          ],
+          skin: 'myskin',
+          radius: 250,
+          tick_sound: 'tick.mp3',
+          duration: 4000,
+          speed: 3,
+          onStop: function (idx, slice) {
+            console.log('winner is ', idx, slice);
+          },
+        });
+
+        $('#spin').click(function () {
+          //disabling the button on spin
+
+          //this.setAttribute('disabled', true);
+
+          //checking if user has already spun the wheel
+          if (localStorage.getItem('has_spun') === 'true') {
+            //alert("you've already spun the wheel");
+          } else {
+          }
+          $('#spinwheel').spinWheel().spin();
+          localStorage.setItem('has_spun', true);
+        });
+
+        /*window.onpopstate = function () {
+          alert('popstate changed');
+        };*/
+      });
+    </script>
+
+    <!-- Halfmoon CSS -->
+    <link href="lib/halfmoon-variables.min.css" rel="stylesheet" />
+
+    <!-- Halfmoon JS -->
+    <script src="lib/halfmoon.min.js"></script>
+  </body>
+</html>
