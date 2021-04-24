@@ -182,13 +182,14 @@
         $('#spin').click(function () {
           //disabling the button on spin
           this.setAttribute('disabled', true);
-          this.innerText = 'COME BACK LATER';
+          this.innerText = 'COME BACK NEXT WEEK';
+          const week = 604800000;
 
           //checking if user has already spun the wheel
-          if (localStorage.getItem('has_spun') === 'true') {
-            let d = localStorage.getItem('date_spun');
-            console.log(Date.now());
-            console.log();
+          if (
+            localStorage.getItem('has_spun') === 'true' &&
+            Date.now() - localStorage.getItem('time_spun') < week
+          ) {
             alert("you've already spun the wheel");
           } else {
             $('#spinwheel').spinWheel().spin();
