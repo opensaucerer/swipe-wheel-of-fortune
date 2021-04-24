@@ -11,11 +11,12 @@ var SpinWheelSkins = {
       offset: 2,
       shadow: { type: 'outer', blur: 2 },
       bgcolors: [
-        '#FFC107',
-        '#00BCD4',
-        '#4CAF50',
-        '#E91E63',
-        'gradient:linear:#f3c5bd:#e86c57:#ea2803:#c72200',
+        '#3bafed',
+        '#ededeb',
+        '#3bafed',
+        '#ededeb',
+        '#3bafed',
+        '#ededeb',
       ],
       text: {
         color: '#ffffff',
@@ -233,11 +234,12 @@ var SpinWheelSkins = {
       var chances = [];
       var idx = 0;
       for (var s of this.options.slices) {
-        for (var i = 0, l = s.chance ? s.chance : 1; i < l; i++) {
+        for (var i = 0, l = s.chance ? s.chance : 0; i < l; i++) {
           chances.push(idx);
         }
         idx++;
       }
+
       this.winner = chances[Math.floor(Math.random() * chances.length)];
       //console.log(this.winner, this.options.slices[this.winner]);
     },

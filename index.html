@@ -13,7 +13,13 @@
       <div class="modal-dialog" role="document">
         <div
           class="modal-content"
-          style="width: fit-content; max-width: fit-content; padding: unset"
+          style="
+            width: fit-content;
+            max-width: fit-content;
+            padding: unset;
+            background-color: unset;
+            border: unset;
+          "
         >
           <a href="#" class="close" role="button" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -30,6 +36,9 @@
     <!-- modal ends -->
 
     <div class="page-wrapper">
+      <!-- Sticky alerts containing the precompiled alert -->
+      <div class="sticky-alerts"></div>
+
       <!-- Modal toggle inside the content wrapper -->
       <div
         style="
@@ -53,37 +62,104 @@
         SpinWheelSkins['myskin'].innerCircle[1]['color'] = '#3bafed';
         SpinWheelSkins['myskin'].innerCircle[1]['image'] = 'swipe2.png';
 
-        /*
-        Pen/book - 25%
-Shirts 40%
-Sweat shirts 6%
-Hoodie 6%
-Cap 6%
-Head warmer 6%
-Umbrella 6%
-Bag 5% */
-
         $('#spinwheel').spinWheel({
           slices: [
             { label: 'Book & Pen', chance: 15, prize: true },
-            { label: 'Shirts', chance: 30, prize: true },
-            { label: 'Hoodie', chance: 2, prize: true },
-            { label: 'Sweat Shirts', chance: 2, prize: true },
             {
-              label: 'Cap',
-              chance: 2,
+              label: 'Shirt',
+              chance: 25,
               prize: true,
               style: {
                 text: {
-                  color: 'orange',
+                  color: '#3bafed',
                   font: 'sans-serif',
-                  font_size: 10,
+                  font_size: 9,
                 },
               },
             },
-            { label: 'Head Warmer', chance: 2, prize: true },
-            { label: 'Umbrella', chance: 2, prize: true },
-            { label: 'Bag', chance: 1, prize: true },
+            { label: 'Hoodie', chance: 0.6, prize: true },
+            {
+              label: 'Umbrella',
+              chance: 0.6,
+              prize: true,
+              style: {
+                text: {
+                  color: '#3bafed',
+                  font: 'sans-serif',
+                  font_size: 9,
+                },
+              },
+            },
+            {
+              label: '5k Cash',
+              prize: false,
+              style: {
+                text: {
+                  color: 'black',
+                  font: 'sans-serif',
+                  font_size: 11,
+                },
+              },
+            },
+            {
+              label: '10k Cash',
+              prize: false,
+              style: {
+                text: {
+                  color: 'black',
+                  font: 'sans-serif',
+                  font_size: 11,
+                },
+              },
+            },
+            { label: 'Sweat Shirt', chance: 0.6, prize: true },
+            {
+              label: 'Cap',
+              chance: 0.6,
+              prize: true,
+              style: {
+                text: {
+                  color: '#3bafed',
+                  font: 'sans-serif',
+                  font_size: 9,
+                },
+              },
+            },
+            { label: 'Head Warmer', chance: 0.6, prize: true },
+            {
+              label: '50k Cash',
+              prize: false,
+              style: {
+                text: {
+                  color: 'black',
+                  font: 'sans-serif',
+                  font_size: 11,
+                },
+              },
+            },
+            {
+              label: '100k Cash',
+              prize: false,
+              style: {
+                text: {
+                  color: 'Red',
+                  font: 'sans-serif',
+                  font_size: 13,
+                },
+              },
+            },
+            {
+              label: 'Bag',
+              chance: 0.5,
+              prize: true,
+              style: {
+                text: {
+                  color: '#3bafed',
+                  font: 'sans-serif',
+                  font_size: 9,
+                },
+              },
+            },
           ],
           skin: 'myskin',
           radius: 250,
@@ -91,22 +167,35 @@ Bag 5% */
           duration: 4000,
           speed: 3,
           onStop: function (idx, slice) {
-            console.log('winner is ', idx, slice);
+            //console.log('winner is ', idx, '----->', slice);
+            halfmoon.initStickyAlert({
+              title: 'Congratulations!!!',
+              content: `You have won a ${slice.label} in the Swipe Referral Contest. Come back next week to win more!`,
+              alertType: 'alert-primary',
+              hasDismissButton: false,
+              timeShown: 10000,
+              fillType: 'filled-lm',
+            });
           },
         });
 
         $('#spin').click(function () {
           //disabling the button on spin
-
-          //this.setAttribute('disabled', true);
+          this.setAttribute('disabled', true);
+          this.innerText = 'COME BACK LATER';
 
           //checking if user has already spun the wheel
           if (localStorage.getItem('has_spun') === 'true') {
-            //alert("you've already spun the wheel");
+            let d = localStorage.getItem('date_spun');
+            console.log(Date.now());
+            console.log();
+            alert("you've already spun the wheel");
           } else {
+            $('#spinwheel').spinWheel().spin();
+
+            localStorage.setItem('has_spun', true);
+            localStorage.setItem('time_spun', Date.now());
           }
-          $('#spinwheel').spinWheel().spin();
-          localStorage.setItem('has_spun', true);
         });
 
         /*window.onpopstate = function () {
