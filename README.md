@@ -12,6 +12,6 @@ Users can win items ranging from Books to pens, caps, shirts, hoodies, bags, and
 
 ## NOTE
 
-This wheel of fortune was designed for use by Swipe Telecom but can be used for several other purposes. By simply readin through the code, you can understand how to configure it for your own specific need.
+This wheel of fortune was designed for use by Swipe Telecom but can be used for several other purposes. By simply reading through the code, you can understand how to configure it for your own specific need.
 
-**An understadning of JQuery is very essential to use this software**
+**An understanding of JQuery is very essential to use this software**
